@@ -10,3 +10,5 @@ libraryDependencies += "org.scalaz" %% "scalaz-core" % "7.1.2"
 resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"
 
 scalacOptions in Test ++= Seq("-Yrangepos")
+
+libraryDependencies +=  "org.openrtb" % "openrtb-validator" % "2.3.1"
