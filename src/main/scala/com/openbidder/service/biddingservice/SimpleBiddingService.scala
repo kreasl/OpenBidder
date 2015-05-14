@@ -3,8 +3,6 @@ package com.openbidder.service.biddingservice
 import com.openbidder.model.bidrequest.BidRequest
 import com.openbidder.model.bidresponse.{Bid, SeatBid, BidResponse}
 
-import scalaz.NonEmptyList
-
 /**
  * Created by Yury Talapila on 5.5.15.
  */
@@ -15,46 +13,33 @@ class SimpleBiddingService extends BiddingService {
 
   def createResponce(request: BidRequest): BidResponse =
     BidResponse(
-      request.id,
-      createSeats(request),
-      Some(nextRandomAnumId),
-      chooseCurrency(request.cur),
-      None,
-      None,
-      None
+      id = request.id,
+      seatbid = createSeats(request),
+      bidid = Some(nextRandomAnumId),
+      cur = chooseCurrency(request.cur)
     )
 
   def createSeats(request: BidRequest): Seq[SeatBid] = {
     Seq(
-        SeatBid(
-        createBids(request),
-        Some(nextRandomAnumId),
-        0,
-        None
+      SeatBid(
+        bid = createBids(request)
       )
     )
   }
 
-  def createBids(request: BidRequest): NonEmptyList[Bid] =
-    NonEmptyList(
+  def createBids(request: BidRequest): Seq[Bid] =
+    Seq(
       Bid(
-        nextRandomAnumId,
-        request.imp.head.id,
-        request.imp.head.bidfloor + minRise,
-        None,
-        None,
-        Some("<div><a href=\"https://github.com/adform/OpenBidder\">Open refence implementation of RTB bidder in Scala in accordance with OpenRTB standard</a></div>"),
-        None,
-        None,
-        None,
-        None,
-        None,
-        None,
-        None,
-        None,
-        None,
-        None,
-        None
+        id = nextRandomAnumId,
+        impid = request.imp.head.id,
+        price = request.imp.head.bidfloor + minRise,
+        adm = Some(
+          "<div>" +
+            "<a href=\"https://github.com/adform/OpenBidder\">" +
+            "Open refence implementation of RTB bidder in Scala in accordance with OpenRTB standard" +
+            "</a>" +
+            "</div>"
+        )
       )
     )
 

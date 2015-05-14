@@ -1,5 +1,14 @@
 package com.openbidder.model.bidresponse
 
-import scalaz.NonEmptyList
+case class SeatBid(
+  bid: Seq[Bid],
+  seat: Option[String] = None,
+  group: Int = 0,
+  ext: Option[Any] = None
+) {
+  assert(bid.length > 0)
+}
 
-case class SeatBid(bid: NonEmptyList[Bid], seat: Option[String], group: Int = 0, ext: Option[Any])
+object SeatBid {
+  def empty = SeatBid(bid = Seq(Bid.empty))
+}

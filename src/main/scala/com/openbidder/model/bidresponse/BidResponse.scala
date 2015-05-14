@@ -1,4 +1,17 @@
 package com.openbidder.model.bidresponse
 
-case class BidResponse(id: String, seatbid: Seq[SeatBid], bidid: Option[String], cur: String = "USD",
-                       customdata: Option[String], nbr: Option[Int], ext: Option[Any])
+import com.openbidder.service.RandomAnumId
+
+case class BidResponse(
+  id: String,
+  seatbid: Seq[SeatBid],
+  bidid: Option[String] = None,
+  cur: String = "USD",
+  customdata: Option[String] = None,
+  nbr: Option[Int] = None,
+  ext: Option[Any] = None
+)
+
+object BidResponse extends RandomAnumId {
+  def empty = BidResponse(id = nextRandomAnumId, seatbid = Nil)
+}

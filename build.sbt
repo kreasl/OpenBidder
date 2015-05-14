@@ -19,7 +19,8 @@ libraryDependencies ++= {
     "org.openrtb"                  % "openrtb-validator"            % openrtbV,
     "com.nicta"                   %% "rng"                          % nictaRngV,
     "org.scalaz"                  %% "scalaz-scalacheck-binding"    % scalazV     % "test",
-    "org.specs2"                  %% "specs2-core"                  % specs2V     % "test"
+    "org.specs2"                  %% "specs2-core"                  % specs2V     % "test",
+    "org.specs2"                  %% "specs2-mock"                  % specs2V     % "test"
   )
 }
 
