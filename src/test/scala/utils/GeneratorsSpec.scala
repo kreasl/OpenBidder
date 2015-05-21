@@ -2,6 +2,7 @@ package utils
 
 import com.nicta.rng.Rng
 import com.nicta.rng.Rng._
+import com.openbidder.model.bidrequest.device.Device
 import com.openbidder.model.common.Win
 import com.openbidder.model.bidrequest._
 import org.specs2.Specification

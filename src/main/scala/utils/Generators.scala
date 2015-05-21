@@ -2,6 +2,7 @@ package utils
 
 import com.nicta.rng.Rng
 import com.nicta.rng.Rng._
+import com.openbidder.model.bidrequest.device._
 import com.openbidder.model.common.Win
 import com.openbidder.model.bidrequest._
 
@@ -48,7 +49,9 @@ object Generators {
   } yield App(id, name, bundle, domain, storeurl, cat, sectioncat, pagecat, ver, privacypolicy, paid, publisher,
       content, keywords, None)
 
-  def randomAuctionType: Rng[AuctionType] = oneof(new AuctionType)
+  def randomAuctionType: Rng[AuctionType] = for {
+    id <- Rng.oneof(0, 1, 2, 3).option
+  } yield AuctionType(id)
 
   def randomBanner: Rng[Banner] = for {
     w <- Rng.int.option
@@ -72,7 +75,7 @@ object Generators {
   def randomBidRequest: Rng[BidRequest] = for {
     id <- identifierstring(32)
     imp <- randomImp.list1(15)
-    site <- randomSite
+    site <- randomSite.option
     app <- randomApp
     device <- randomDevice
     user <- randomUser
@@ -159,9 +162,16 @@ object Generators {
     dpidmd5 <- Rng.string(7).option
     macsha1 <- Rng.string(7).option
     macmd5 <- Rng.string(7).option
+    ext <- randomExt.option
 
-  } yield Device(ua, geo, dnt, lmt, ip, ipv6, devicetype, make, model, os, osv, hvm, h, w, ppi, pxratio, js, flashver,
-      language, carrier, connectiontype, ifa, didsha1, didmd5, dpidsha1, dpidmd5, macsha1, macmd5, None)
+  } yield Device(ua, geo, dnt, lmt, Some(IP(ip, ipv6)), Some(DeviceInfo(devicetype, make, model)), Some(OS(os, osv)),
+      hvm, Some(Size(h, w)), ppi, pxratio, js, flashver,
+      language, carrier, connectiontype, ifa, Some(DID(didsha1, didmd5)), Some(DPID(dpidsha1, dpidmd5)),
+      Some(MAC(macsha1, macmd5)), ext)
+
+  def randomExt: Rng[Ext] = for {
+    sessiondepth <- Rng.int.option
+  } yield Ext(sessiondepth)
 
   def randomGeo: Rng[Geo] = for {
     lat <- Rng.float.option
@@ -173,11 +183,7 @@ object Generators {
     metro <- Rng.string(7).option
     city <- Rng.string(7).option
     zip <- Rng.string(7).option
-    utcoffset <- {
-      for {
-        offset <- Rng.int
-      } yield new Integer(offset)
-    }.option
+    utcoffset <- Rng.int.option
   } yield Geo(lat, lon, geoType, country, region, regionfips, metro, city, zip, utcoffset, None)
 
   def randomImp: Rng[Imp] = for {
