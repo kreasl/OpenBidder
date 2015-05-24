@@ -1,3 +1,10 @@
 package com.openbidder.model.bidrequest
 
-case class Regs(coppa: Option[Int], ext: Option[Any])
+import play.api.libs.json.Json
+
+case class Regs(coppa: Option[Int], ext: Option[Ext])
+
+object Regs {
+	implicit val regsRead = Json.reads[Regs] 
+	implicit val regsWrite = Json.writes[Regs] 	
+} 

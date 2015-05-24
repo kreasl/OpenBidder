@@ -5,7 +5,8 @@ version := "1.0"
 scalaVersion := "2.11.6"
 
 resolvers ++= Seq(
-  "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"
+  "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases",
+  "Typesafe Repo" at "http://repo.typesafe.com/typesafe/releases/"
 )
 
 libraryDependencies ++= {
@@ -15,6 +16,7 @@ libraryDependencies ++= {
   val nictaRngV = "1.3.0"
   val akkaV = "2.3.11"
   val akkaStreamsHttpV = "1.0-RC2"
+  val playJsonV = "2.4.0-RC1"
   Seq(
     "org.scalaz"                  %% "scalaz-core"                        % scalazV,
     "org.scalaz"                  %% "scalaz-effect"                      % scalazV,
@@ -26,7 +28,8 @@ libraryDependencies ++= {
     "com.typesafe.akka"            % "akka-actor_2.11"                    % akkaV,
     "com.typesafe.akka"            % "akka-stream-experimental_2.11"      % akkaStreamsHttpV,
     "com.typesafe.akka"            % "akka-http-core-experimental_2.11"   % akkaStreamsHttpV,
-    "com.typesafe.akka"            % "akka-http-scala-experimental_2.11"  % akkaStreamsHttpV
+    "com.typesafe.akka"            % "akka-http-scala-experimental_2.11"  % akkaStreamsHttpV,
+    "com.typesafe.play"            % "play-json_2.11"                     % playJsonV
   )
 }
 

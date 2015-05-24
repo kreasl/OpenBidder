@@ -1,5 +1,6 @@
 package com.openbidder.model.bidresponse
 
+import play.api.libs.json.Json
 import com.openbidder.service.RandomAnumId
 
 case class Bid(
@@ -19,9 +20,11 @@ case class Bid(
   dealid: Option[String] = None,
   h: Option[Int] = None,
   w: Option[Int] = None,
-  ext: Option[Any] = None
+  ext: Option[Ext] = None
 )
 
 object Bid extends RandomAnumId {
   def empty = Bid(id = nextRandomAnumId, impid = "", price = 0)
+	implicit val bidRead = Json.reads[Bid]
+	implicit val bidWrite = Json.writes[Bid]
 }
