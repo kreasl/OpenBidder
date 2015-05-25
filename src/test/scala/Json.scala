@@ -22,9 +22,9 @@ class Json extends Specification {
     ).mkString
 
     val jsonService = new JsonService
-    val jsonRequest = jsonService.parse(request)
+    val jsonRequest = jsonService.parseBidRequest(request)
 
-    val jsonWrite = jsonService.toJson(jsonRequest)
+    val jsonWrite = jsonService.bidRequestToJson(jsonRequest)
 
     def verifyResultType = {
       jsonRequest must haveClass[BidRequest]
