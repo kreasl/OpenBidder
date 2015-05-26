@@ -1,3 +1,5 @@
+import NativePackagerHelper._
+
 name := "OpenBidder"
 
 version := "1.0"
@@ -15,22 +17,30 @@ libraryDependencies ++= {
   val specs2V = "3.6"
   val nictaRngV = "1.3.0"
   val akkaV = "2.3.11"
-  val akkaStreamsHttpV = "1.0-RC2"
+  val akkaStreamV = "1.0-RC2"
   val playJsonV = "2.4.0-RC1"
   Seq(
-    "org.scalaz"                  %% "scalaz-core"                        % scalazV,
-    "org.scalaz"                  %% "scalaz-effect"                      % scalazV,
-    "org.openrtb"                  % "openrtb-validator"                  % openrtbV,
-    "com.nicta"                   %% "rng"                                % nictaRngV,
-    "org.scalaz"                  %% "scalaz-scalacheck-binding"          % scalazV     % "test",
-    "org.specs2"                  %% "specs2-core"                        % specs2V     % "test",
-    "org.specs2"                  %% "specs2-mock"                        % specs2V     % "test",
-    "com.typesafe.akka"            % "akka-actor_2.11"                    % akkaV,
-    "com.typesafe.akka"            % "akka-stream-experimental_2.11"      % akkaStreamsHttpV,
-    "com.typesafe.akka"            % "akka-http-core-experimental_2.11"   % akkaStreamsHttpV,
-    "com.typesafe.akka"            % "akka-http-scala-experimental_2.11"  % akkaStreamsHttpV,
-    "com.typesafe.play"            % "play-json_2.11"                     % playJsonV
+    "org.scalaz" %% "scalaz-core" % scalazV,
+    "org.scalaz" %% "scalaz-effect" % scalazV,
+    "org.openrtb" % "openrtb-validator" % openrtbV,
+    "com.nicta" %% "rng" % nictaRngV,
+    "com.typesafe.play" %% "play-json" % playJsonV,
+    "com.typesafe.akka" %% "akka-actor" % akkaV,
+    "com.typesafe.akka" %% "akka-kernel" % akkaV,
+    "com.typesafe.akka" %% "akka-slf4j" % akkaV,
+    "com.typesafe.akka" %% "akka-stream-experimental" % akkaStreamV,
+    "com.typesafe.akka" %% "akka-http-core-experimental" % akkaStreamV,
+    "com.typesafe.akka" %% "akka-http-scala-experimental" % akkaStreamV,
+    "com.typesafe.akka" %% "akka-http-spray-json-experimental" % akkaStreamV,
+    "org.scalaz" %% "scalaz-scalacheck-binding" % scalazV % "test",
+    "org.specs2" %% "specs2-core" % specs2V % "test",
+    "org.specs2" %% "specs2-mock" % specs2V % "test",
+    "com.typesafe.akka" %% "akka-http-testkit-scala-experimental" % akkaStreamV % "test"
   )
 }
+
+mainClass in Compile := Some("akka.kernel.Main")
+
+enablePlugins(JavaServerAppPackaging)
 
 scalacOptions in Test ++= Seq("-Yrangepos")
