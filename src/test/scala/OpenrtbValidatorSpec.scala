@@ -1,12 +1,13 @@
-import org.specs2.mutable.Specification
 import org.openrtb.validator._
+import org.specs2.mutable.Specification
+
 import scala.io.Source
 
-class OpenrtbValidatorSpec extends Specification {
+class OpenRtbValidatorSpec extends Specification {
   "openrtb-validator simple lib test" >> {
     "example request validation test" >> {
       val request = Source.fromURL(
-        getClass().getResource("/examples/request.json")
+        getClass.getResource("/examples/request.json")
       ).mkString
       val validator = OpenRtbValidatorFactory.getValidator(
         OpenRtbInputType.BID_REQUEST,
@@ -16,7 +17,7 @@ class OpenrtbValidatorSpec extends Specification {
     }
     "example response validation test" >> {
       val response = Source.fromURL(
-        getClass().getResource("/examples/response.json")
+        getClass.getResource("/examples/response.json")
       ).mkString
       val validator = OpenRtbValidatorFactory.getValidator(
         OpenRtbInputType.BID_RESPONSE,
@@ -25,5 +26,4 @@ class OpenrtbValidatorSpec extends Specification {
       validator.isValid(response) must beTrue
     }
   }
-
 }
