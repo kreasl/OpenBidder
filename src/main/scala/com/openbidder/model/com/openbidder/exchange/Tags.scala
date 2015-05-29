@@ -1,5 +1,3 @@
 package com.openbidder.model.com.openbidder.exchange
 
-class AuctionService {
-
-}
+case class Tags(content: String)

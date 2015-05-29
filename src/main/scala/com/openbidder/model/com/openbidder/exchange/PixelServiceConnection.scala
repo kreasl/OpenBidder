@@ -1,5 +1,3 @@
 package com.openbidder.model.com.openbidder.exchange
 
-trait ExchangeDAO {
-
-}
+case class PixelServiceConnection()
