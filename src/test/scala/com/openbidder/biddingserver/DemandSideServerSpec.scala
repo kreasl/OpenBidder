@@ -1,8 +1,7 @@
 package com.openbidder.biddingserver
 
 import org.specs2.Specification
-import org.specs2.scalaz.ValidationMatcher
-import scalaz._
+import org.specs2.scalaz.ValidationMatchers
 
 
 class DemandSideServerSpec extends Specification with ValidationMatchers { def is = s2"""
