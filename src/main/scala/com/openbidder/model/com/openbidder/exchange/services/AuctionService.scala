@@ -1,6 +1,7 @@
 package com.openbidder.model.com.openbidder.exchange.services
 
 import com.openbidder.model.bidrequest._
+import com.openbidder.model.bidrequest.device.Device
 import com.openbidder.model.bidresponse.{Bid, BidResponse}
 import com.openbidder.model.com.openbidder.exchange.{Tags, BidderConnection}
 
@@ -31,7 +32,7 @@ class AuctionService(bidders: Seq[BidderConnection]) {
     BidRequest(
       "123",
       NonEmptyList(imp),
-      makeSite(),
+      None,
       makeApp(),
       makeDevice(),
       makeUser(),
@@ -91,14 +92,6 @@ class AuctionService(bidders: Seq[BidderConnection]) {
 
   def makeDevice(): Device = {
     Device(
-      None,
-      None,
-      None,
-      None,
-      None,
-      None,
-      None,
-      None,
       None,
       None,
       None,
