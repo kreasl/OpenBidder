@@ -19,6 +19,7 @@ libraryDependencies ++= {
   val akkaV = "2.3.11"
   val akkaStreamV = "1.0-RC2"
   val playJsonV = "2.4.0-RC1"
+  val scalazSpecs2V = "0.3.0"
   Seq(
     "org.scalaz" %% "scalaz-core" % scalazV,
     "org.scalaz" %% "scalaz-effect" % scalazV,
@@ -35,7 +36,8 @@ libraryDependencies ++= {
     "org.scalaz" %% "scalaz-scalacheck-binding" % scalazV % "test",
     "org.specs2" %% "specs2-core" % specs2V % "test",
     "org.specs2" %% "specs2-mock" % specs2V % "test",
-    "com.typesafe.akka" %% "akka-http-testkit-scala-experimental" % akkaStreamV % "test"
+    "com.typesafe.akka" %% "akka-http-testkit-scala-experimental" % akkaStreamV % "test",
+    "org.typelevel" %% "scalaz-specs2" % scalazSpecs2V % "test"
   )
 }
 

@@ -9,6 +9,7 @@ import com.openbidder.service.biddingservice.{SimpleBiddingService, BiddingServi
 import com.openbidder.service.json.JsonService
 import org.openrtb.validator.{OpenRtbInputType, OpenRtbValidatorFactory}
 import scala.io.Source
+import scalaz._
 
 class DemandSideServer() {
   private val requestValidator = OpenRtbValidatorFactory.getValidator(OpenRtbInputType.BID_REQUEST, ValidatorOpenRtbVersion)
@@ -16,14 +17,16 @@ class DemandSideServer() {
   private val jsonService = new JsonService
   private val biddingService: BiddingService = new SimpleBiddingService
 
-  def respond(sspName: String, contentType: String, is: InputStream): DSSResponse = {
-    if (isUnknownServer(sspName)) UnknownServer
-    else if (isUnsupportedContentType(contentType)) UnsupportedContentType
-    else readRequest(contentType, is) match {
-      case Some(bidRequest) =>
+  import Scalaz._
+
+  type Response = Option[Array[Byte]]
+
+  def respond(sspName: String, contentType: String, is: InputStream): Validation[String, Response] = {
+    if (isUnknownServer(sspName)) "Unknown server".failure
+    else if (isUnsupportedContentType(contentType)) "Unsupported content type".failure
+    else readRequest(contentType, is) map { bidRequest =>
         val bidResponse = biddingService.process(bidRequest)
-        writeResponse(contentType, bidResponse) map Bid getOrElse NoBid
-      case None => BadRequest
+        writeResponse(contentType, bidResponse)
     }
   }
 
@@ -33,25 +36,12 @@ class DemandSideServer() {
   //TODO: implement
   private def isUnknownServer(sspName: String) = false
 
-  private def readRequest(contentType: String, is: InputStream): Option[BidRequest] = {
-    if (JsonContentType == contentType) readRequestFromJson(is) else None
-  }
-
-  private def readRequestFromJson(is: InputStream): Option[BidRequest] = {
+  private def readRequest(contentType: String, is: InputStream):  Validation[String, BidRequest] = {
     val json = Source.fromInputStream(is).mkString
-    if (requestValidator.isValid(json)) {
-      val bidRequest = jsonService.parseBidRequest(json)
-      Some(bidRequest)
-    } else {
-      None
-    }
+    if (requestValidator.isValid(json)) jsonService.parseBidRequest(json).success else "Bad request".failure
   }
 
-  private def writeResponse(contentType: String, bidResponse: BidResponse): Option[Array[Byte]] = {
-    if (JsonContentType == contentType) writeResponseAsJson(bidResponse) else None
-  }
-
-  private def writeResponseAsJson(bidResponse: BidResponse): Option[Array[Byte]] = {
+  private def writeResponse(contentType: String, bidResponse: BidResponse): Response = {
     val json = jsonService.bidResponseToJson(bidResponse)
     if (responseValidator.isValid(json)) {
       val bytes = json.getBytes(StandardCharsets.UTF_8)
@@ -62,15 +52,3 @@ class DemandSideServer() {
     }
   }
 }
-
-sealed trait DSSResponse
-
-case object UnknownServer extends DSSResponse
-
-case object UnsupportedContentType extends DSSResponse
-
-case object BadRequest extends DSSResponse
-
-case class Bid(body: Array[Byte]) extends DSSResponse
-
-case object NoBid extends DSSResponse
