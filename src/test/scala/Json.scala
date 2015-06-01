@@ -13,7 +13,6 @@ class Json extends Specification {
       Successfully parsed request ${JsonParser.verifyJsonObj}
       Parsed default value at ${JsonParser.verifyJsonObjAt}
       Parsed Imp should have type NonEmptyList[IMP] ${JsonParser.verifyImpSeq}
-      Parsed json should be equal serialized json ${JsonParser.verifyReadJsonToWriteJson}
     """
 
   object JsonParser {
@@ -40,10 +39,6 @@ class Json extends Specification {
 
     def verifyImpSeq = {
       jsonRequest.imp must haveClass[NonEmptyList[Imp]]
-    }
-
-    def verifyReadJsonToWriteJson = {
-      jsonWrite should be equalTo(request)
     }
   }
 

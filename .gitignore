@@ -1,4 +1,8 @@
 bin/
+project/boot
+project/project
+project/target
+project/plugins
 target/
 .idea
 .cache
