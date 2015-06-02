@@ -1,4 +1,4 @@
-//import NativePackagerHelper._
+import NativePackagerHelper._
 
 name := "OpenBidder"
 
@@ -41,6 +41,6 @@ libraryDependencies ++= {
 
 mainClass in Compile := Some("akka.kernel.Main")
 
-//enablePlugins(JavaServerAppPackaging)
+enablePlugins(JavaServerAppPackaging)
 
 scalacOptions in Test ++= Seq("-Yrangepos")
