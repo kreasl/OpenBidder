@@ -71,22 +71,22 @@ class GeneratorsSpec extends Specification { def is = s2"""
 
   def e2 =
     (Generators.randomApp.run.unsafePerformIO() should beAnInstanceOf[App]) and
-    (Generators.randomAuctionType.run.unsafePerformIO() should beAnInstanceOf[AuctionType]) and
-    (Generators.randomBanner.run.unsafePerformIO() should beAnInstanceOf[Banner]) and
-    (Generators.randomBidRequest.run.unsafePerformIO() should beAnInstanceOf[BidRequest]) and
-    (Generators.randomContent.run.unsafePerformIO() should beAnInstanceOf[Content]) and
-    (Generators.randomData.run.unsafePerformIO() should beAnInstanceOf[Data]) and
-    (Generators.randomDeal.run.unsafePerformIO() should beAnInstanceOf[Deal]) and
-    (Generators.randomDevice.run.unsafePerformIO() should beAnInstanceOf[Device]) and
-    (Generators.randomGeo.run.unsafePerformIO() should beAnInstanceOf[Geo]) and
-    (Generators.randomImp.run.unsafePerformIO() should beAnInstanceOf[Imp]) and
-    (Generators.randomNative.run.unsafePerformIO() should beAnInstanceOf[Native]) and
-    (Generators.randomPmp.run.unsafePerformIO() should beAnInstanceOf[Pmp]) and
-    (Generators.randomProducer.run.unsafePerformIO() should beAnInstanceOf[Producer]) and
-    (Generators.randomPublisher.run.unsafePerformIO() should beAnInstanceOf[Publisher]) and
-    (Generators.randomRegs.run.unsafePerformIO() should beAnInstanceOf[Regs]) and
-    (Generators.randomSegment.run.unsafePerformIO() should beAnInstanceOf[Segment]) and
-    (Generators.randomSite.run.unsafePerformIO() should beAnInstanceOf[Site]) and
-    (Generators.randomUser.run.unsafePerformIO() should beAnInstanceOf[User]) and
-    (Generators.randomVideo.run.unsafePerformIO() should beAnInstanceOf[Video])
+      (Generators.randomAuctionType.run.unsafePerformIO() should beAnInstanceOf[AuctionType]) and
+      (Generators.randomBanner.run.unsafePerformIO() should beAnInstanceOf[Banner]) and
+      (Generators.randomBidRequest.run.unsafePerformIO() should beAnInstanceOf[BidRequest]) and
+      (Generators.randomContent.run.unsafePerformIO() should beAnInstanceOf[Content]) and
+      (Generators.randomData.run.unsafePerformIO() should beAnInstanceOf[Data]) and
+      (Generators.randomDeal.run.unsafePerformIO() should beAnInstanceOf[Deal]) and
+      (Generators.randomDevice.run.unsafePerformIO() should beAnInstanceOf[Device]) and
+      (Generators.randomGeo.run.unsafePerformIO() should beAnInstanceOf[Geo]) and
+      (Generators.randomImp.run.unsafePerformIO() should beAnInstanceOf[Imp]) and
+      (Generators.randomNative.run.unsafePerformIO() should beAnInstanceOf[Native]) and
+      (Generators.randomPmp.run.unsafePerformIO() should beAnInstanceOf[Pmp]) and
+      (Generators.randomProducer.run.unsafePerformIO() should beAnInstanceOf[Producer]) and
+      (Generators.randomPublisher.run.unsafePerformIO() should beAnInstanceOf[Publisher]) and
+      (Generators.randomRegs.run.unsafePerformIO() should beAnInstanceOf[Regs]) and
+      (Generators.randomSegment.run.unsafePerformIO() should beAnInstanceOf[Segment]) and
+      (Generators.randomSite.run.unsafePerformIO() should beAnInstanceOf[Site]) and
+      (Generators.randomUser.run.unsafePerformIO() should beAnInstanceOf[User]) and
+      (Generators.randomVideo.run.unsafePerformIO() should beAnInstanceOf[Video])
 }
