@@ -18,13 +18,14 @@ class AuctionService(bidders: Seq[BidderConnection]) {
   }
 
   def winner(responses: Seq[BidResponse]): Bid = {
-    responses.sortWith((left, right) => left.seatbid.head.bid.head.price > right.seatbid.head.bid.head.price)
+    val res = responses.sortWith((left, right) => left.seatbid.head.bid.head.price > right.seatbid.head.bid.head.price)
 
-    if (responses.size >= 2) {
-      responses(1).seatbid.head.bid.head
+    if (res.size >= 2) {
+      return res(1).seatbid.head.bid.head
     }
 
-    responses.head.seatbid.head.bid.head
+    res.head.seatbid.head.bid.head
+
   }
 
 
