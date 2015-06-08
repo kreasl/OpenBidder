@@ -2,6 +2,7 @@ package com.openbidder.service.biddingservice
 
 import com.openbidder.model.bidrequest.BidRequest
 import com.openbidder.model.bidresponse.{Bid, SeatBid, BidResponse}
+import com.openbidder.service.RandomAnumId
 
 /**
  * Created by Yury Talapila on 5.5.15.
@@ -15,7 +16,7 @@ class SimpleBiddingService extends BiddingService {
     BidResponse(
       id = request.id,
       seatbid = createSeats(request),
-      bidid = Some(nextRandomAnumId),
+      bidid = Some(RandomAnumId.nextRandomAnumId),
       cur = chooseCurrency(request.cur)
     )
 
@@ -30,7 +31,7 @@ class SimpleBiddingService extends BiddingService {
   def createBids(request: BidRequest): Seq[Bid] =
     Seq(
       Bid(
-        id = nextRandomAnumId,
+        id = RandomAnumId.nextRandomAnumId,
         impid = request.imp.head.id,
         price = request.imp.head.bidfloor + minRise,
         adm = Some(

@@ -23,8 +23,8 @@ case class Bid(
   ext: Option[Ext] = None
 )
 
-object Bid extends RandomAnumId {
-  def empty = Bid(id = nextRandomAnumId, impid = "", price = 0)
+object Bid {
+  def empty = Bid(id = RandomAnumId.nextRandomAnumId, impid = "", price = 0)
 	implicit val bidRead = Json.reads[Bid]
 	implicit val bidWrite = Json.writes[Bid]
 }

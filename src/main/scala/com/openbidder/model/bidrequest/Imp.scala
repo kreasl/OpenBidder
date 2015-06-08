@@ -2,11 +2,22 @@ package com.openbidder.model.bidrequest
 
 import play.api.libs.json._
 
-case class Imp(id: String, banner: Option[Banner], video: Option[Video], native: Option[Native],
-               displaymanager: Option[String], displaymanagerver: Option[String], instl: Int = 0,
-               tagid: Option[String], bidfloor: Float = 0, bidfloorcur: String = "USD",
-               secure: Option[Int], iframebuster: Option[Seq[String]], pmp: Option[Pmp],
-               ext: Option[Ext])
+case class Imp(
+  id: String,
+  banner: Option[Banner] = None,
+  video: Option[Video] = None,
+  native: Option[Native] = None,
+  displaymanager: Option[String] = None,
+  displaymanagerver: Option[String] = None,
+  instl: Int = 0,
+  tagid: Option[String] = None,
+  bidfloor: Float = 0,
+  bidfloorcur: String = "USD",
+  secure: Option[Int] = None,
+  iframebuster: Option[Seq[String]] = None,
+  pmp: Option[Pmp] = None,
+  ext: Option[Ext] = None
+)
 
 object Imp {
 	implicit val impRead: Reads[Imp] = new Reads[Imp] {
