@@ -1,0 +1,5 @@
+---
+- name: Start aerospike
+  service:
+    name: aerospike
+    state: started

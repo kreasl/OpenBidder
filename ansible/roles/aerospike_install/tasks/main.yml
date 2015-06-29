@@ -1,0 +1,26 @@
+---
+- name: Check if Aerospike is already installed
+  stat:
+    path: /etc/init.d/aerospike
+  register: aerospike_service
+
+- name: Download last Aerospike archive
+  get_url:
+    url: http://aerospike.com/download/server/latest/artifact/el6
+    dest: /tmp/
+  register: archive
+  when: aerospike_service.stat.exists == false
+
+- name: Unpack Aerospike archive
+  unarchive:
+    src: "{{ archive.dest }}"
+    dest: /tmp/
+    copy: no
+  when: aerospike_service.stat.exists == false
+
+- name: Install Aerospike package
+  command: "chdir={{ archive.dest.split('.tgz')[0] }} ./asinstall"
+  become: yes
+  notify:
+    - Start aerospike
+  when: aerospike_service.stat.exists == false
