@@ -1,7 +1,10 @@
 ---
 - name: Install Aerospike for OpenBidder project
-  hosts: vagrant
-  remote_user: vagrant
+
+  vars:
+    aerospike_namespace: openbidder
+
+  hosts: all
 
   roles:
     - aerospike_install

@@ -1,0 +1,12 @@
+#!/bin/sh
+
+cat << EOF
+{
+    "SOMEHOSTNAME": {
+        "remote_user": "SOMEUSER",
+#        "ansible_become_pass": "%sudo password on remote host%",
+        "appuser": "%OpenBidder folder owner name%",
+        "apppath": "/srv/OpenBidder" 
+    }
+}
+EOF

@@ -1,0 +1,12 @@
+#!/bin/sh
+
+cat << EOF
+{
+    "localhost": {
+        "ansible_connection": "local",
+        "ansible_become_pass": "SOMEPASSWORDHERE",
+        "appuser": "SOMEUSERHERE",
+        "apppath": "SOMEPATHHERE"
+    }
+}
+EOF

@@ -1,0 +1,28 @@
+---
+- name: Install git on CentOS
+  yum:
+    name: git
+    state: present
+  become: yes
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+
+- name: Install git on Ubuntu
+  apt:
+    name: git
+    state: present
+  become: yes
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Download from github
+  git:
+    repo: https://github.com/adform/OpenBidder.git
+    dest: "{{ apppath }}"
+    accept_hostkey: yes
+  become: yes
+
+- name: Change owner
+  file:
+    path: "{{ apppath }}"
+    owner: "{{ appuser }}"
+    recurse: yes
+  become: yes

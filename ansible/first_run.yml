@@ -1,5 +1,0 @@
----
-#
-  - include: install_aerospike.yml
-  - include: deploy.yml
-  - include: run.yml

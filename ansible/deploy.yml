@@ -1,0 +1,11 @@
+---
+- name: Deploy OpenBidder
+
+  hosts: all
+
+  vars:
+#    apppath: /srv/OpenBidder
+#    appuser: vagrant
+
+  roles:
+    - deploy

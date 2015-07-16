@@ -1,0 +1,35 @@
+---
+- name: Download latest Aerospike archive for Ubuntu
+  get_url:
+    url: http://www.aerospike.com/download/server/latest/artifact/ubuntu12
+    dest: /tmp/
+  register: archive
+
+- name: Unpack Aerospike archive
+  unarchive:
+    src: "{{ archive.dest }}"
+    dest: /tmp/
+    copy: no
+
+- name: Install Aerospike package
+  command: "chdir={{ archive.dest.split('.tgz')[0] }} ./asinstall"
+  become: yes
+
+- name: Set up Aerospike config
+  template:
+    src: aerospike.conf
+    dest: /etc/aerospike/aerospike.conf
+    backup: yes
+  become: yes
+  notify:
+    - Start aerospike
+
+- name: Remove temporary folder
+  file:
+    path: "{{ archive.dest.split('.tgz')[0] }}"
+    state: absent
+
+- name: Remove archive
+  file:
+    path: "{{ archive.dest }}"
+    state: absent

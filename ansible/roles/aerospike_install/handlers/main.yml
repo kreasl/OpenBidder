@@ -3,3 +3,4 @@
   service:
     name: aerospike
     state: started
+  become: yes
